@@ -3,12 +3,12 @@ import { UserData, Rooms } from 'types';
 import './App.css';
 import RoomsList from './components/RoomsList';
 import UserLogin from './components/UserLogin';
-import { getRooms, joinRoom } from './utils/sockets';
+import { getRooms } from './utils/sockets';
 
 function App() {
   const [userData, setUserData] = useState<UserData>({
     username: 'Thomas',
-    room: 'room1'
+    room: ''
   })
   const [rooms, setRooms] = useState<Rooms[]>([])
   const handleGetRooms = (): void => {
@@ -18,7 +18,7 @@ function App() {
   return (
     <div className="App">
         <header className="App-header">
-        <h3>Hello, {userData.username}. You're in room: {userData.room}</h3>
+        <h3>Hello, {userData.username}. You selected: {userData.room}</h3>
         <RoomsList handleGetRooms={handleGetRooms} rooms={rooms} setRoom={setUserData} userData={userData} />
         <UserLogin setUser={setUserData} userData={userData} />
       </header>

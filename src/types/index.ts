@@ -8,3 +8,5 @@ export interface Rooms {
 }
 
 export type SetRooms = (rooms: Rooms[]) => void;
+
+export type SetUserData = (userData: UserData) => void;

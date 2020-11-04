@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { UserData } from 'types';
 import { joinRoom } from '../utils/sockets';
 
@@ -8,23 +8,26 @@ interface Rooms {
 
 interface Props {
     handleGetRooms: () => void;
-    setRoom: (userData: UserData) => void;
+    setUserData: (userData: UserData) => void;
     rooms?: Rooms[];
     userData: UserData;
 }
 
-const RoomsList: React.FC<Props> = ({ handleGetRooms, rooms, setRoom, userData }) => {
+const RoomsList: React.FC<Props> = ({ handleGetRooms, rooms, setUserData, userData }) => {
+    const [selectedRoom, setSelectedRoom] = useState<string>("");
+
     const handleOnClick = (room: string): void => {
-        setRoom({...userData, room})
+        setSelectedRoom(room);
     }
 
     const handleJoinRoom = (): void => {
-        joinRoom(userData);
+        joinRoom(userData, setUserData);
     }
+
     return (
         <div>
             <ul>
-                {rooms && rooms.map((room, i) => <li onClick={e => handleOnClick(room.name)} key={i}>{room.name}</li>)}
+                {rooms && rooms.map((room, i) => <li style={{ color: selectedRoom === room.name ? "lime" : "white" }} onClick={e => handleOnClick(room.name)} key={i}>{room.name}</li>)}
             </ul>
             {userData.room && <button onClick={() => handleJoinRoom()}>Join room</button>}
             <button onClick={() => handleGetRooms()}>Get Rooms!</button>

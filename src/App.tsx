@@ -19,7 +19,7 @@ function App() {
     <div className="App">
         <header className="App-header">
         <h3>Hello, {userData.username}. You selected: {userData.room}</h3>
-        <RoomsList handleGetRooms={handleGetRooms} rooms={rooms} setRoom={setUserData} userData={userData} />
+        <RoomsList handleGetRooms={handleGetRooms} rooms={rooms} setUserData={setUserData} userData={userData} />
         <UserLogin setUser={setUserData} userData={userData} />
       </header>
     </div>

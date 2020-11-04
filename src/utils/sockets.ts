@@ -1,13 +1,14 @@
 import io from 'socket.io-client';
-import { UserData, Rooms, SetRooms } from 'types'
+import { UserData, Rooms, SetRooms, SetUserData } from 'types'
 
 const socket = io('http://localhost:5000');
 
-export const joinRoom = (user: UserData): void => {
+export const joinRoom = (user: UserData, setUserData: SetUserData) : void => {
     socket.emit('join', user, (error: any) => {
         if (error) {
           console.log(error)
         }
+        setUserData({...user, room: user.room })
       })
 }
 
